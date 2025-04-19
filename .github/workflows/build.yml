@@ -16,7 +16,7 @@ jobs:
             - run: mkdir ~/haxelib && haxelib setup ~/haxelib
             - uses: actions/checkout@v4
               with:
-                repository: https://github.com/FunkinCrew/Funkin/tree/main
+                repository: FunkinCrew/Funkin/tree/main
                 submodules: recursive
             - run: cd funkin
             - run: dir
