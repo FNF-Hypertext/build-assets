@@ -1,0 +1,33 @@
+name: Compile game and build assets folder
+
+on: 
+    workflow_dispatch:
+    push:
+
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        permissions:
+            contents: write
+        steps:
+            - run: sudo add-apt-repository ppa:haxe/releases -y
+            - run: sudo apt-get update
+            - run: sudo apt-get install haxe -y
+            - run: mkdir ~/haxelib && haxelib setup ~/haxelib
+            - uses: actions/checkout@v4
+              with:
+                repository: https://github.com/FunkinCrew/Funkin/tree/main
+                submodules: recursive
+            - run: cd funkin
+            - run: dir
+            - run: haxelib --global install hmm
+            - run: haxelib --global run hmm setup
+            - run: hmm install
+            - run: haxelib run lime setup
+            - run: lime test html5
+            #no use in using any scripts cause theyre all in haxe
+            - run: sudo rm rf export/release/html5/bin/assets/scripts
+            - uses: stefanzweifel/git-auto-commit-action@v5
+              with:
+                file_pattern: export/release/html5/bin/assets
