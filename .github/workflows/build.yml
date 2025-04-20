@@ -31,9 +31,19 @@ jobs:
               working-directory: ${{ github.workspace }}
             - run: lime build html5
               working-directory: ${{ github.workspace }}
-            - uses: actions/upload-artifact@v4
-              with:
-                path: ${{ github.workspace }}/export/release/html5/bin/assets
-                if-no-files-found: error
-                #might be problematic if this hasnt run in 30 days
-                retention-days: 30
+            - run: git init
+              working-directory: ${{ github.workspace }}/export/release/html5/bin/assets
+            - run: git branch -m master main
+              working-directory: ${{ github.workspace }}/export/release/html5/bin/assets
+            - run: git remote add poop https://github.com/FNF-Hypertext/build-assets/
+              working-directory: ${{ github.workspace }}/export/release/html5/bin/assets
+            - run: git pull poop main
+              working-directory: ${{ github.workspace }}/export/release/html5/bin/assets
+            - run: git add *
+              working-directory: ${{ github.workspace }}/export/release/html5/bin/assets
+            - run: git commit -m "automated commit"
+              working-directory: ${{ github.workspace }}/export/release/html5/bin/assets
+            - run: git push
+              working-directory: ${{ github.workspace }}/export/release/html5/bin/assets
+
+
