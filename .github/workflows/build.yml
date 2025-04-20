@@ -37,9 +37,9 @@ jobs:
               working-directory: ${{ github.workspace }}/export/release/html5/bin/assets
             - run: git remote add poop https://github.com/FNF-Hypertext/build-assets/
               working-directory: ${{ github.workspace }}/export/release/html5/bin/assets
-            - run: git pull poop main
-              working-directory: ${{ github.workspace }}/export/release/html5/bin/assets
             - run: git add *
+              working-directory: ${{ github.workspace }}/export/release/html5/bin/assets
+            - run: git pull poop main
               working-directory: ${{ github.workspace }}/export/release/html5/bin/assets
             - run: git commit -m "automated commit"
               working-directory: ${{ github.workspace }}/export/release/html5/bin/assets
