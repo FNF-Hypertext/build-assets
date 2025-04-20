@@ -34,15 +34,15 @@ jobs:
               working-directory: ${{ github.workspace }}/export/release/html5/bin/assets
             - run: git branch -m master main
               working-directory: ${{ github.workspace }}/export/release/html5/bin/assets
-            - run: git remote add poop https://github.com/FNF-Hypertext/build-assets/
+            - run: git remote add poop git@github.com:FNF-Hypertext/build-assetes.git
               working-directory: ${{ github.workspace }}/export/release/html5/bin/assets
             - run: git add *
               working-directory: ${{ github.workspace }}/export/release/html5/bin/assets
-            - run: git config user.email "gusulioche@gmail.com"
+            - run: git config --global user.email "gusulioche@gmail.com"
               working-directory: ${{ github.workspace }}/export/release/html5/bin/assets
-            - run: git config user.name "gusborg88"
+            - run: git config --global user.name "gusborg88"
               working-directory: ${{ github.workspace }}/export/release/html5/bin/assets
-            - run: git config pull.rebase false
+            - run: git config --global pull.rebase false
               working-directory: ${{ github.workspace }}/export/release/html5/bin/assets
             - run: git commit -m "automated commit"
               working-directory: ${{ github.workspace }}/export/release/html5/bin/assets
