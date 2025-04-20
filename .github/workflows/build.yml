@@ -31,9 +31,11 @@ jobs:
               working-directory: ${{ github.workspace }}
             - run: lime build html5
               working-directory: ${{ github.workspace }}
+            - run: git config --global init.defaultBranch main
+              working-directory: ${{ github.workspace }}/export/release/html5/bin/assets
             #no use in using any scripts cause theyre all in haxe
             - run: git init
               working-directory: ${{ github.workspace }}/export/release/html5/bin/assets
             - uses: stefanzweifel/git-auto-commit-action@v5
               with:
-                repository: ${{ github.workspace }}/export/release/html5/bin/assets
+                repository: ${{ github.workspace }}/export/release/html5/bin/assets/
