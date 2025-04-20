@@ -1,0 +1,52 @@
+name: Compile game and build assets folder
+
+on: 
+    workflow_dispatch:
+
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        permissions:
+            contents: write
+        steps:
+            - run: sudo apt-get update
+            - run: sudo apt-get install haxe -y
+            - run: mkdir ~/haxelib && haxelib setup ~/haxelib
+            - uses: actions/checkout@v4
+              with:
+                repository: FunkinCrew/Funkin
+                submodules: recursive
+            #ts so repetitive 💔
+            #I dont really care  i dont know github actions and i dont want to
+            - run: haxelib --global install hmm
+              working-directory: ${{ github.workspace }}
+            - run: haxelib --global run hmm setup
+              working-directory: ${{ github.workspace }}
+            - run: hmm install
+              working-directory: ${{ github.workspace }}
+              #it asks a question that you have to type y into to downkload
+            - run: echo "y" | haxelib run lime setup
+              working-directory: ${{ github.workspace }}
+            - run: lime build html5
+              working-directory: ${{ github.workspace }}
+            - run: git init
+              working-directory: ${{ github.workspace }}/export/release/html5/bin/assets
+            - run: git branch -m master main
+              working-directory: ${{ github.workspace }}/export/release/html5/bin/assets
+            - run: git remote add poop https://github.com/FNF-Hypertext/build-assets/
+              working-directory: ${{ github.workspace }}/export/release/html5/bin/assets
+            - run: git add *
+              working-directory: ${{ github.workspace }}/export/release/html5/bin/assets
+            - run: git config user.email "gusulioche@gmail.com"
+              working-directory: ${{ github.workspace }}/export/release/html5/bin/assets
+            - run: git config user.name "gusborg88"
+              working-directory: ${{ github.workspace }}/export/release/html5/bin/assets
+            - run: git config pull.rebase false
+              working-directory: ${{ github.workspace }}/export/release/html5/bin/assets
+            - run: git commit -m "automated commit"
+              working-directory: ${{ github.workspace }}/export/release/html5/bin/assets
+            - run: git pull --allow-unrelated-histories poop main
+              working-directory: ${{ github.workspace }}/export/release/html5/bin/assets
+            - run: git push
+              working-directory: ${{ github.workspace }}/export/release/html5/bin/assets
