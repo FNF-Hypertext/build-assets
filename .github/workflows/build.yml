@@ -38,4 +38,5 @@ jobs:
               working-directory: ${{ github.workspace }}/export/release/html5/bin/assets
             - uses: stefanzweifel/git-auto-commit-action@v5
               with:
-                repository: ${{ github.workspace }}/export/release/html5/bin/assets/
+                repository: ${{ github.workspace }}/export/release/html5/bin/assets
+                branch: main
