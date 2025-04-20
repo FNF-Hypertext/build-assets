@@ -46,7 +46,9 @@ jobs:
               working-directory: ${{ github.workspace }}/export/release/html5/bin/assets
             - run: git commit -m "automated commit"
               working-directory: ${{ github.workspace }}/export/release/html5/bin/assets
-            - run: git pull --allow-unrelated-histories poop main
+            #git calls it an unrelated history cause it uses git init instead of git clone and remakes basically what was in the og repository
+            #I dont care if the history is fucked tho cuase its an automatic repo
+            - run: git pull --allow-unrelated-histories -m "for fun" -s ours poop main
               working-directory: ${{ github.workspace }}/export/release/html5/bin/assets
-            - run: git push
+            - run: git push --set-upstream poop main
               working-directory: ${{ github.workspace }}/export/release/html5/bin/assets
