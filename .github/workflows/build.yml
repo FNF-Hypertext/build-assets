@@ -32,7 +32,7 @@ jobs:
             - run: lime build html5
               working-directory: ${{ github.workspace }}
             #no use in using any scripts cause theyre all in haxe
-            - run: sudo rm rf export/release/html5/bin/assets/scripts
+            - run: sudo rm -rf ${{github.workspace}}/export/release/html5/bin/assets/scripts
             - uses: stefanzweifel/git-auto-commit-action@v5
               with:
                 file_pattern: export/release/html5/bin/assets
