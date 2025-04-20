@@ -6,7 +6,7 @@ on:
 
 
 jobs:
-    install-haxe:
+    build:
         runs-on: ubuntu-latest
         permissions:
             contents: write
@@ -26,10 +26,10 @@ jobs:
               working-directory: ${{ github.workspace }}
             - run: hmm install
               working-directory: ${{ github.workspace }}
-            - run: haxelib run lime setup
+              #it asks a question that you have to type y into to downkload
+            - run: echo "y" | haxelib run lime setup
               working-directory: ${{ github.workspace }}
-            #it asks a question that you have to type y into to downkload
-            - run: echo "y" | lime test html5
+            - run: lime test html5
               working-directory: ${{ github.workspace }}
             #no use in using any scripts cause theyre all in haxe
             - run: sudo rm rf export/release/html5/bin/assets/scripts
