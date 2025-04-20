@@ -6,7 +6,7 @@ on:
 
 
 jobs:
-    build:
+    install-haxe:
         runs-on: ubuntu-latest
         permissions:
             contents: write
@@ -18,13 +18,18 @@ jobs:
               with:
                 repository: FunkinCrew/Funkin
                 submodules: recursive
-            - run: cd funkin
-            - run: dir
+            #ts so repetitive 💔
+            #I dont really care  i dont know github actions and i dont want to
             - run: haxelib --global install hmm
+              working-directory: $GITHUB_WORKSPACE
             - run: haxelib --global run hmm setup
+              working-directory: $GITHUB_WORKSPACE
             - run: hmm install
+              working-directory: $GITHUB_WORKSPACE
             - run: haxelib run lime setup
+              working-directory: $GITHUB_WORKSPACE
             - run: lime test html5
+              working-directory: $GITHUB_WORKSPACE
             #no use in using any scripts cause theyre all in haxe
             - run: sudo rm rf export/release/html5/bin/assets/scripts
             - uses: stefanzweifel/git-auto-commit-action@v5
