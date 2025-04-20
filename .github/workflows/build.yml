@@ -31,14 +31,9 @@ jobs:
               working-directory: ${{ github.workspace }}
             - run: lime build html5
               working-directory: ${{ github.workspace }}
-            - run: git config --global init.defaultBranch main
-              working-directory: ${{ github.workspace }}/export/release/html5/bin/assets
-            #no use in using any scripts cause theyre all in haxe
-            - run: git init
-              working-directory: ${{ github.workspace }}/export/release/html5/bin/assets
-            - uses: stefanzweifel/git-auto-commit-action@v5
+            - uses: actions/upload-artifact@v4
               with:
-                repository: ${{ github.workspace }}/export/release/html5/bin/assets
-                branch: main
-                create_branch: true
-                push_options: '--force'
+                path: ${{ github.workspace }}/export/release/html5/bin/assets
+                if-no-files-found: error
+                #might be problematic if this hasnt run in 30 days
+                retention-days: 30
