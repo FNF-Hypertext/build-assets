@@ -46,7 +46,7 @@ jobs:
               working-directory: ${{ github.workspace }}/export/release/html5/bin/assets
             - run: git commit -m "automated commit"
               working-directory: ${{ github.workspace }}/export/release/html5/bin/assets
-            - run: git pull poop main
+            - run: git pull --allow-unrelated-histories poop main
               working-directory: ${{ github.workspace }}/export/release/html5/bin/assets
             - run: git push
               working-directory: ${{ github.workspace }}/export/release/html5/bin/assets
