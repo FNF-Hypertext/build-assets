@@ -40,3 +40,4 @@ jobs:
               with:
                 repository: ${{ github.workspace }}/export/release/html5/bin/assets
                 branch: main
+                create_branch: true
