@@ -1,4 +1,4 @@
-name: Compile game and build assets folder
+okname: Compile game and build assets folder
 
 on: 
     workflow_dispatch:
@@ -34,7 +34,7 @@ jobs:
               working-directory: ${{ github.workspace }}/export/release/html5/bin/assets
             - run: git branch -m master main
               working-directory: ${{ github.workspace }}/export/release/html5/bin/assets
-            - run: git remote add poop git@github.com:FNF-Hypertext/build-assetes.git
+            - run: git remote add poop git@github.com:FNF-Hypertext/build-assets.git
               working-directory: ${{ github.workspace }}/export/release/html5/bin/assets
             - run: git add *
               working-directory: ${{ github.workspace }}/export/release/html5/bin/assets
