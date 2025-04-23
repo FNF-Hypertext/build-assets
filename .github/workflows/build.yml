@@ -1,4 +1,4 @@
-okname: Compile game and build assets folder
+name: Compile game and build assets folder
 
 on: 
     workflow_dispatch:
