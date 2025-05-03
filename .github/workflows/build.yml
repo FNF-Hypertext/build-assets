@@ -28,8 +28,14 @@ jobs:
               #it asks a question that you have to type y into to downkload
             - run: echo "y" | haxelib run lime setup
               working-directory: ${{ github.workspace }}
-            - run: haxe tools.hxml
-              working-directory: ${{ github.workspace }}/.haxelib/lime/git/tools
+            - run: git submodule init
+              working-directory: ${{ github.workspace }}/.haxelib/lime/git
+            - run: git submodule sync
+              working-directory: ${{ github.workspace }}/.haxelib/lime/git
+            - run: git submodule update
+              working-directory: ${{ github.workspace }}/.haxelib/lime/git
+            - run: sudo apt install libgl1-mesa-dev libglu1-mesa-dev g++ g++-multilib gcc-multilib libasound2-dev libx11-dev libxext-dev libxi-dev libxrandr-dev libxinerama-dev libpulse-dev
+              working-directory: ${{ github.workspace }}/.haxelib/lime/git
             - run: lime build html5
               working-directory: ${{ github.workspace }}
             - run: git init
