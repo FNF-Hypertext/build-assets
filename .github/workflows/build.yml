@@ -1,0 +1,65 @@
+name: Compile game and build assets folder
+
+on:
+    workflow_dispatch:
+    push:
+
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        permissions:
+            contents: write
+        steps:
+            - run: sudo apt-get update
+            - run: sudo apt-get install haxe -y
+            - run: mkdir ~haxelib && haxelib setup ~haxelib
+            - uses: actionscheckout@v4
+              with:
+                repository: FunkinCrew/Funkin
+                submodules: recursive
+            #ts so repetitive 💔
+            #I dont really care  i dont know github actions and i dont want to
+            - run: haxelib --global install hmm
+              working-directory: ${{ github.workspace }}
+            - run: haxelib --global run hmm setup
+              working-directory: ${{ github.workspace }}
+            - run: hmm install
+              working-directory: ${{ github.workspace }}
+              #it asks a question that you have to type y into to downkload
+            - run: echo y | haxelib run lime setup
+              working-directory: ${{ github.workspace }}
+            - run: echo y  lime rebuild tools
+              working-directory: ${{ github.workspace }}
+            - run: git submodule init
+              working-directory: ${{ github.workspace }}.haxelib/lime/git
+            - run: git submodule sync
+              working-directory: ${{ github.workspace }}.haxelib/lime/git
+            - run: git submodule update
+              working-directory: ${{ github.workspace }}.haxelib/lime/git
+            - run: sudo apt install libgl1-mesa-dev libglu1-mesa-dev g++ g++-multilib gcc-multilib libasound2-dev libx11-dev libxext-dev libxi-dev libxrandr-dev libxinerama-dev libpulse-dev
+              working-directory: ${{ github.workspace }}.haxelib/lime/git
+            - run: lime build html5
+              working-directory: ${{ github.workspace }}
+            - run: git init
+              working-directory: ${{ github.workspace }}export/release/html5/bin/assets
+            - run: git branch -m master main
+              working-directory: ${{ github.workspace }}export/release/html5/bin/assets
+            - run: git remote add poop https://github.com/FNF-Hypertext/build-assets.git
+              working-directory: ${{ github.workspace }}export/release/html5/bin/assets
+            - run: git add 
+              working-directory: ${{ github.workspace }}export/release/html5/bin/assets
+            - run: git config --global user.email gusulioche@gmail.com
+              working-directory: ${{ github.workspace }}export/release/html5/bin/assets
+            - run: git config --global user.name gusborg88
+              working-directory: ${{ github.workspace }}export/release/html5/bin/assets
+            - run: git config --global pull.rebase false
+              working-directory: ${{ github.workspace }}export/release/html5/bin/assets
+            - run: git commit -m automated commit
+              working-directory: ${{ github.workspace }}export/release/html5/bin/assets
+            #git calls it an unrelated history cause it uses git init instead of git clone and remakes basically what was in the og repository
+            #I dont care if the history is fucked tho cuase its an automatic repo
+            - run: git pull --allow-unrelated-histories -s ours poop main
+              working-directory: ${{ github.workspace }}export/release/html5/bin/assets
+            - run: git push --set-upstream poop main
+              working-directory: ${{ github.workspace }}export/release/html5/bin/assets
