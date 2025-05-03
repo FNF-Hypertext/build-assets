@@ -31,7 +31,7 @@ jobs:
             - run: echo "y" | lime rebuild tools
               working-directory: ${{ github.workspace }}
             - run: haxe tools.hxml
-              working-directory: ${{ github.workspace }/.haxelib/lime/git/tools
+              working-directory: ${{ github.workspace }}/.haxelib/lime/git/tools
             - run: lime build html5
               working-directory: ${{ github.workspace }}
             - run: git init
