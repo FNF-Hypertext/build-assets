@@ -2,6 +2,7 @@ name: Compile game and build assets folder
 
 on: 
     workflow_dispatch:
+    push:
 
 
 jobs:
