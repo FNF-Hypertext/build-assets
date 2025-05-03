@@ -28,6 +28,8 @@ jobs:
               #it asks a question that you have to type y into to downkload
             - run: echo "y" | haxelib run lime setup
               working-directory: ${{ github.workspace }}
+            - run: lime rebuild tools
+              working-directory: ${{ github.workspace }}
             - run: lime build html5
               working-directory: ${{ github.workspace }}
             - run: git init
